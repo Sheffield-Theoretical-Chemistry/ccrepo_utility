@@ -8,6 +8,7 @@ import colorlog
 import requests
 from tqdm import tqdm
 
+__version__ = "1.0.0b1"
 
 def _set_logger(filename: str = None):
     """
