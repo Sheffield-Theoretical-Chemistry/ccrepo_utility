@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ccrepo"
-version = "0.1.0"
+version = "1.0.0b1"
 description = "A utility for calling and using a basis set from ccrepo"
 readme = "README.md"
 license = { text = "MIT License (Non-Commercial)" }
