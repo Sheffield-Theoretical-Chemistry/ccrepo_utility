@@ -1,0 +1,4 @@
+requests
+colorlog
+tqdm
+numpy
