@@ -1,15 +1,16 @@
 # %%
-from ccrepo.fetch import fetch_basis
-from ccrepo.containers import BasisSet, Shell
 import os
 
+from ccrepo.containers import BasisSet, Shell
+from ccrepo.fetch import fetch_basis
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-data_filepath = os.path.join(script_dir, 'data', 'sample_basis.txt')
+data_filepath = os.path.join(script_dir, "data", "sample_basis.txt")
 with open(data_filepath) as sample_basis:
     sample_data = sample_basis.read()
-    
+
 basis_set = fetch_basis(["H", "B"], "cc-pVDZ", catalogue=sample_data)
+
 
 def test_fetch_basis():
     # Assert that the basis set has the keys "B" and "H"

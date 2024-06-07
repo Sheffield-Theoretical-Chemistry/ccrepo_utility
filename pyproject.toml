@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ccrepo"
+version = "0.1.0"
+description = "A utility for calling and using a basis set from ccrepo"
+readme = "README.md"
+license = { text = "MIT License (Non-Commercial)" }
+authors = [
+    { name = "Dr. Shaun Thomas Edward Donnelly", email = "shaun.t.e.donnelly@gmail.com" }
+]
+keywords = ["quantum", "chemistry", "basis sets", "ccrepo", "basisopt"]
+
+[project.urls]
+Repository = "https://github.com/stedonnelly/ccrepo_utility
+
+[options]
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.32.3",
+    "colorlog>=2.32.3",
+    "tqdm>=4.66.4",
+    "numpy>=1.26.4"
+]
+
+[options.extras_require]
+dev = [
+    "pytest>=8.2.2",
+    "black>=24.4.2",
+    "sphinx>=7.3.7",
+    "sphinx-rtd-theme>=2.0.0"
+]
+
+[tool.black]
+skip-string-normalization = ture
+line-length = 100
+
+[project.urls]
+Homepage = "https://github.com/stedonnelly/ccrepo_utility"
+
+[tool.setuptools]
+packages = ["ccrepo"]
+include_package_data = true
+

@@ -1,7 +1,8 @@
 # ccrepo_basis_set/process.py
 
-from .containers import Shell, BasisSet
 import numpy as np
+
+from .containers import BasisSet, Shell
 
 
 def parse_basis_set(input_data):

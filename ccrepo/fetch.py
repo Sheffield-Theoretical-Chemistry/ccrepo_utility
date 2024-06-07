@@ -1,13 +1,10 @@
 # ccrepo_basis_set/fetch.py
 
-from typing import Union, Optional
+from typing import Optional, Union
 
-from .process import parse_basis_set
+from . import catalogue, ccrepo_logger
 from .converters import convert_to_format
-
-from . import ccrepo_logger
-
-from . import catalogue
+from .process import parse_basis_set
 
 
 def get_basis_set_block(
@@ -98,8 +95,8 @@ def fetch_basis(
     Returns:
         dict: Dictionary containing the basis set information.
     """
-    if 'catalogue' in kwargs:
-        catalogue = kwargs['catalogue']
+    if "catalogue" in kwargs:
+        catalogue = kwargs["catalogue"]
     basis_set_block, available_basis = get_basis_set_block(
         catalogue, elements, basis_set_name
     )

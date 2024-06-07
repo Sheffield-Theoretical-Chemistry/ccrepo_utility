@@ -2,6 +2,7 @@
 
 from . import ccrepo_logger
 
+
 def convert_to_format(basis_set, format: str) -> str:
     """
     Convert a BasisSet object to a string in the specified format.

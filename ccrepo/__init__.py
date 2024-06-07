@@ -1,13 +1,12 @@
 # ccrepo_basis_set/__init__.py
 
+import logging
+import os
 from typing import Optional
+
+import colorlog
 import requests
 from tqdm import tqdm
-import os
-
-import logging
-import colorlog
-
 
 
 def _set_logger(filename: str = None):
@@ -49,12 +48,12 @@ def fetch_file_from_repo():
     Returns:
         str: The content of the file.
     """
-    
+
     script_dir = os.path.dirname(os.path.realpath(__file__))
-    data_filepath = os.path.join(script_dir, 'data', 'cc-basis-catalogue.txt')
-    
+    data_filepath = os.path.join(script_dir, "data", "cc-basis-catalogue.txt")
+
     repo_url = "https://raw.githubusercontent.com/Sheffield-Theoretical-Chemistry/ccrepo-raw/main/cc-basis-catalogue.txt"
-    #headers = {"Authorization": f"token {token}"}
+    # headers = {"Authorization": f"token {token}"}
     try:
         response = requests.get(repo_url, stream=True)
 
@@ -80,13 +79,17 @@ def fetch_file_from_repo():
 
             return b"".join(content).decode("utf-8")
         else:
-            ccrepo_logger.warning("Unable to access online repository, using local copy. Note, this may be out of date.")
+            ccrepo_logger.warning(
+                "Unable to access online repository, using local copy. Note, this may be out of date."
+            )
             with open(data_filepath, "r") as catalogue:
                 return catalogue.read()
-            #response.raise_for_status()
+            # response.raise_for_status()
     except Exception as e:
         print(e)
-        ccrepo_logger.warning("Unable to access online repository, using local copy. Note, this may be out of date.")
+        ccrepo_logger.warning(
+            "Unable to access online repository, using local copy. Note, this may be out of date."
+        )
         with open(data_filepath, "r") as catalogue:
             return catalogue.read()
 
