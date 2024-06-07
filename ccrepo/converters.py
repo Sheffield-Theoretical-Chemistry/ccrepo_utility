@@ -1,5 +1,6 @@
 # ccrepo_basis_set/converters.py
 
+from . import ccrepo_logger
 
 def convert_to_format(basis_set, format: str) -> str:
     """
@@ -42,13 +43,11 @@ def _convert_to_molpro(basis_sets: list) -> str:
             start_index = non_zero_indices[0] + 1
             end_index = non_zero_indices[-1] + 1
             non_zero_coefs = coefs[start_index - 1 : end_index]
-
-            return (
-                f"c, {start_index}.{end_index}, {', '.join(map(str, non_zero_coefs))}"
-            )
+            non_zero_coefs = [f"{coef:.6E}" for coef in non_zero_coefs]
+            return f"c, {start_index}.{end_index}, {', '.join(non_zero_coefs)};"
 
         return (
-            f"{shell.l.lower()}, {element}, {','.join(map(str,shell.exps.tolist()))}\n"
+            f"{shell.l.lower()}, {element}, {', '.join(map(str,[f'{val:.6E}' for val in shell.exps.tolist()]))};\n"
             + "\n".join(
                 [
                     format_coefficients(coefs)
@@ -69,9 +68,13 @@ def _convert_to_molpro(basis_sets: list) -> str:
         )
 
     molpro_str = f"""
+! Basis set from ccRepo https://grant-hill.group.shef.ac.uk/ccrepo/
+
 spherical
 basis={{
-!
+
 {''.join(_create_element_string(basis_sets[key]) for key in basis_sets)}
 }}"""
+
+    ccrepo_logger.info("Converted basis set to Molpro format.")
     return molpro_str

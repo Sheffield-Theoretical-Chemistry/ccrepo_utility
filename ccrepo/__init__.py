@@ -1,30 +1,94 @@
 # ccrepo_basis_set/__init__.py
 
-from .fetch import fetch_file_from_repo, get_basis_set_block
-from .process import parse_basis_set
-from .utils import convert_to_basisopt_internal
-from .converters import convert_to_format
 from typing import Optional
+import requests
+from tqdm import tqdm
+import os
 
-personal_access_token = "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"
+import logging
+import colorlog
 
 
-def fetch_basis(elements: list, basis_set_name: str, format: Optional[list] = None) -> dict:
-    """Fetches a basis set from the ccRepo basis set catalogue.
 
-    Args:
-        elements (list): List of element symbols.
-        basis_set_name (str): Basis set name to fetch
-        format (Optional[list]): If specified, the basis set will be converted to the specified format.
+def _set_logger(filename: str = None):
+    """
+    Initialises Python logging module with a custom format and log level.
+    """
+    ccrepo_logger = logging.getLogger("ccrepo")
+    ccrepo_logger.setLevel(logging.INFO)
+
+    log_format = "%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s"
+
+    bold = "\033[1m"
+
+    colorlog_format = f"{bold} " "%(log_color)s " f"{log_format}"
+
+    colorlog.basicConfig(format=colorlog_format)
+
+    if filename is not None:
+        fh = logging.FileHandler(filename)
+        fh.setLevel(level)
+        formatter = logging.Formatter(log_format)
+        fh.setFormatter(formatter)
+        ccrepo_logger.addHandler(fh)
+
+    return ccrepo_logger
+
+
+ccrepo_logger = _set_logger()
+
+
+def fetch_file_from_repo():
+    """
+    Fetch a file from the specified GitHub repository using a personal access token,
+    with a progress bar.
+
+    Parameters:
+        token (str): The personal access token for authentication.
 
     Returns:
-        dict: Dictionary containing the basis set information.
+        str: The content of the file.
     """
-    catalogue = fetch_file_from_repo(personal_access_token)
-    basis_set_block = get_basis_set_block(catalogue, elements, basis_set_name)
-    parsed_basis_sets = parse_basis_set(basis_set_block)
-    if format:
-        converted_basis = convert_to_format(parsed_basis_sets, format)
-        return converted_basis
-    else:
-        return parsed_basis_sets
+    
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    data_filepath = os.path.join(script_dir, 'data', 'cc-basis-catalogue.txt')
+    
+    repo_url = "https://raw.githubusercontent.com/Sheffield-Theoretical-Chemistry/ccrepo-raw/main/cc-basis-catalogue.txt"
+    #headers = {"Authorization": f"token {token}"}
+    try:
+        response = requests.get(repo_url, stream=True)
+
+        if response.status_code == 200:
+            total_length = int(response.headers.get("content-length", 0))
+            if total_length == 0:
+                raise ValueError("Failed to retrieve content length for the file.")
+
+            content = []
+            with tqdm(
+                total=total_length,
+                unit="B",
+                unit_scale=True,
+                desc="Retrieving basis set catalogue",
+                ncols=100,
+                ascii=True,
+                leave=True,
+            ) as pbar:
+                for chunk in response.iter_content(chunk_size=1024):
+                    if chunk:
+                        content.append(chunk)
+                        pbar.update(len(chunk))
+
+            return b"".join(content).decode("utf-8")
+        else:
+            ccrepo_logger.warning("Unable to access online repository, using local copy. Note, this may be out of date.")
+            with open(data_filepath, "r") as catalogue:
+                return catalogue.read()
+            #response.raise_for_status()
+    except Exception as e:
+        print(e)
+        ccrepo_logger.warning("Unable to access online repository, using local copy. Note, this may be out of date.")
+        with open(data_filepath, "r") as catalogue:
+            return catalogue.read()
+
+
+catalogue = fetch_file_from_repo()

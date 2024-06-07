@@ -6,9 +6,12 @@ setup(
     version="0.1.0",
     packages=find_packages(),
     install_requires=[
-        "requests",
+        "requests>=2.32.3",
+        "color>=2.32.3",
+        "tqdm>=4.66.4",
+        "numpy>=1.26.4",
     ],
-    author="Shaun Donnelly",
+    author="Dr. Shaun Thomas Edward Donnelly",
     author_email="shaun.t.e.donnelly@gmail.com",
     description="A utility for calling and using a basis set from ccrepo",
     url="https://github.com/stedonnelly/ccrepo_utility",
@@ -17,5 +20,5 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.10',
 )

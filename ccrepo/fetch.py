@@ -1,47 +1,13 @@
 # ccrepo_basis_set/fetch.py
-import requests
-from tqdm import tqdm
-from typing import Union
 
+from typing import Union, Optional
 
-def fetch_file_from_repo(token):
-    """
-    Fetch a file from the specified GitHub repository using a personal access token,
-    with a progress bar.
+from .process import parse_basis_set
+from .converters import convert_to_format
 
-    Parameters:
-        token (str): The personal access token for authentication.
+from . import ccrepo_logger
 
-    Returns:
-        str: The content of the file.
-    """
-    repo_url = "https://raw.githubusercontent.com/stedonnelly/ccrepo-raw/main/cc-basis-catalogue.txt"
-    headers = {"Authorization": f"token {token}"}
-    response = requests.get(repo_url, headers=headers, stream=True)
-
-    if response.status_code == 200:
-        total_length = int(response.headers.get("content-length", 0))
-        if total_length == 0:
-            raise ValueError("Failed to retrieve content length for the file.")
-
-        content = []
-        with tqdm(
-            total=total_length,
-            unit="B",
-            unit_scale=True,
-            desc="Retrieving basis set catalogue",
-            ncols=100,
-            ascii=True,
-            leave=True,
-        ) as pbar:
-            for chunk in response.iter_content(chunk_size=1024):
-                if chunk:
-                    content.append(chunk)
-                    pbar.update(len(chunk))
-
-        return b"".join(content).decode("utf-8")
-    else:
-        response.raise_for_status()
+from . import catalogue
 
 
 def get_basis_set_block(
@@ -63,11 +29,14 @@ def get_basis_set_block(
     capture = False
     current_block = []
 
+    if type(elements) == str:
+        elements = [elements]
+
     available_basis = []
 
     for line in lines:
         if any(line.startswith(f"{element}:{basis_set_name}:") for element in elements):
-            available_basis.append(line.split(':')[0])
+            available_basis.append(line.split(":")[0])
             capture = True
             current_block = [line]
         elif capture:
@@ -82,19 +51,68 @@ def get_basis_set_block(
     if capture and current_block:
         blocks.append("\n".join(current_block))
 
-    for element in elements:
-        if element not in available_basis:
-            print(
-                f"No {basis_set_name} found for element {element} in the ccRepo catalogue."
-            )
-    unavailable_basis = [element for element in elements if element not in available_basis]
+    # for element in elements:
+    #     if element not in available_basis:
+    #         print(
+    #             f"No {basis_set_name} found for element {element} in the ccRepo catalogue."
+    #         )
+
+    unavailable_basis = [
+        element for element in elements if element not in available_basis
+    ]
     if blocks:
-        print(f"Found {basis_set_name} for element(s) {','.join(available_basis)} in the ccRepo catalogue.")
+        ccrepo_logger.info(
+            f"Found {basis_set_name} for element(s) {','.join(available_basis)} in the ccRepo catalogue."
+        )
         if unavailable_basis:
-            print(f"No {basis_set_name} found for element(s) {','.join(unavailable_basis)} in the ccRepo catalogue.")
-        return "\n\n".join(blocks)
+            ccrepo_logger.warning(
+                f"No {basis_set_name} found for element(s) {','.join(unavailable_basis)} in the ccRepo catalogue."
+            )
+        return "\n\n".join(blocks), available_basis
     else:
         raise ValueError(
             f"No basis set blocks found for elements {elements} with basis set {basis_set_name}"
         )
 
+
+def fetch_basis(
+    elements: list,
+    basis_set_name: str,
+    format: Optional[list] = None,
+    export: Optional[bool] = None,
+    filepath: str = None,
+) -> dict:
+    """Fetches a basis set from the ccRepo basis set catalogue.
+
+    Args:
+        elements (list): List of element symbols.
+        basis_set_name (str): Basis set name to fetch
+        format (Optional[list]): If specified, the basis set will be converted to the specified format.
+
+    Returns:
+        dict: Dictionary containing the basis set information.
+    """
+    basis_set_block, available_basis = get_basis_set_block(
+        catalogue, elements, basis_set_name
+    )
+    parsed_basis_sets = parse_basis_set(basis_set_block)
+    if format:
+        converted_basis = convert_to_format(parsed_basis_sets, format.lower())
+        ccrepo_logger.info(
+            f"Fetched basis set for element(s) {', '.join(available_basis)} with basis set {basis_set_name} from the ccRepo catalogue and converted fo format {format}."
+        )
+        if not export:
+            return converted_basis
+        elif export:
+            if not filename:
+                raise ValueError(
+                    "No filename specified for export. Please set this using the filename parameter."
+                )
+            return converted_basis
+
+        return
+    else:
+        ccrepo_logger.info(
+            f"Fetched basis set for element(s) {', '.join(available_basis)} with basis set {basis_set_name} from the ccRepo catalogue."
+        )
+        return parsed_basis_sets
