@@ -1,6 +1,8 @@
 # %%
 from ccrepo.fetch import fetch_basis
 from ccrepo.containers import BasisSet, Shell
+import os
+
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 data_filepath = os.path.join(script_dir, 'data', 'sample_basis.txt')
