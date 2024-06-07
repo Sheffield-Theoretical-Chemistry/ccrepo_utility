@@ -1,7 +1,8 @@
 # ccrepo_basis_set/process.py
 
-from .containers import Shell, BasisSet
 import numpy as np
+
+from .containers import BasisSet, Shell
 
 
 def parse_basis_set(input_data):
@@ -27,18 +28,14 @@ def parse_basis_set(input_data):
         # Process each line of the basis set data
         for line in lines[2:]:
             parts = line.split()
-            if (
-                parts[0] in "SPDFGHIJKL"
-            ):  # Check if the line starts with an angular momentum label
+            if parts[0] in "SPDFGHIJKL":  # Check if the line starts with an angular momentum label
                 if (
                     current_angular_momentum
                 ):  # If there's an ongoing block, save it before starting a new one
                     shell = Shell()
                     shell.l = current_angular_momentum.lower()
                     shell.exps = np.array(exponents)
-                    shell.coefs = [
-                        np.array(coeff) for coeff in zip(*contraction_coeffs)
-                    ]
+                    shell.coefs = [np.array(coeff) for coeff in zip(*contraction_coeffs)]
                     basis_set.add_shell(shell)
                 current_angular_momentum = parts[0]
                 exponents = []

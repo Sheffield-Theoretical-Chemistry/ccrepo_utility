@@ -2,6 +2,7 @@
 
 from . import ccrepo_logger
 
+
 def convert_to_format(basis_set, format: str) -> str:
     """
     Convert a BasisSet object to a string in the specified format.
@@ -49,11 +50,7 @@ def _convert_to_molpro(basis_sets: list) -> str:
         return (
             f"{shell.l.lower()}, {element}, {', '.join(map(str,[f'{val:.6E}' for val in shell.exps.tolist()]))};\n"
             + "\n".join(
-                [
-                    format_coefficients(coefs)
-                    for coefs in shell.coefs
-                    if format_coefficients(coefs)
-                ]
+                [format_coefficients(coefs) for coefs in shell.coefs if format_coefficients(coefs)]
             )
         )
 
@@ -61,9 +58,7 @@ def _convert_to_molpro(basis_sets: list) -> str:
         return (
             f"! {basis_set.element} {basis_set.contraction}"
             + "\n"
-            + "\n".join(
-                [_convert_shell(shell, basis_set.element) for shell in basis_set.shells]
-            )
+            + "\n".join([_convert_shell(shell, basis_set.element) for shell in basis_set.shells])
             + "\n\n"
         )
 
