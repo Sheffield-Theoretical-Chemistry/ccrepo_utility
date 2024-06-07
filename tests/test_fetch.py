@@ -2,13 +2,13 @@
 from ccrepo.fetch import fetch_basis
 from ccrepo.containers import BasisSet, Shell
 
+script_dir = os.path.dirname(os.path.realpath(__file__))
+data_filepath = os.path.join(script_dir, 'data', 'sample_basis.txt')
+with open(data_filepath)) as sample_basis:
+    sample_data = sample_basis.read()
+basis_set = fetch_basis(["H", "B"], "cc-pVDZ", catalogue=sample_data)
 
 def test_fetch_basis():
-    # Fetch the basis set
-    with open("./data/sample_basis.txt") as sample_basis:
-        sample_data = sample_basis.read()
-    basis_set = fetch_basis(["H", "B"], "cc-pVDZ", catalogue=sample_data)
-
     # Assert that the basis set has the keys "B" and "H"
     assert "B" in basis_set
     assert "H" in basis_set
@@ -19,11 +19,6 @@ def test_fetch_basis():
 
 
 def test_shells():
-    # Fetch the basis set
-    with open("./data/sample_basis.txt") as sample_basis:
-        sample_data = sample_basis.read()
-    basis_set = fetch_basis(["H", "B"], "cc-pVDZ", catalogue=sample_data)
-
     # Assert that the objects in the dict entry.shells are Shell objects
     for shell in basis_set["B"].shells:
         assert isinstance(shell, Shell)
@@ -32,10 +27,7 @@ def test_shells():
 
 
 def test_exponents():
-    with open("./data/sample_basis.txt") as sample_basis:
-        sample_data = sample_basis.read()
-    basis_set = fetch_basis(["H", "B"], "cc-pVDZ", catalogue=sample_data)
-
+    # Assert that the exponents are correct
     assert basis_set["H"].shells[0].exps.tolist() == [
         1.301000e01,
         1.962000e00,
