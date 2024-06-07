@@ -7,9 +7,10 @@ setup(
     packages=find_packages(),
     install_requires=[
         "requests>=2.32.3",
-        "color>=2.32.3",
+        "colorlog>=2.32.3",
         "tqdm>=4.66.4",
         "numpy>=1.26.4",
+        "pytest",
     ],
     author="Dr. Shaun Thomas Edward Donnelly",
     author_email="shaun.t.e.donnelly@gmail.com",
