@@ -38,7 +38,4 @@ dev = [
 skip-string-normalization = true
 line-length = 100
 
-[tool.setuptools]
-packages = ["ccrepo"]
-include_package_data = true
 
