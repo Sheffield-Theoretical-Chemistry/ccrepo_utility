@@ -81,6 +81,7 @@ def fetch_basis(
     format: Optional[list] = None,
     export: Optional[bool] = None,
     filepath: str = None,
+    **kwargs,
 ) -> dict:
     """Fetches a basis set from the ccRepo basis set catalogue.
 
@@ -88,10 +89,17 @@ def fetch_basis(
         elements (list): List of element symbols.
         basis_set_name (str): Basis set name to fetch
         format (Optional[list]): If specified, the basis set will be converted to the specified format.
+        export (Optional[bool]): If True, the basis set will be exported.
+        filepath (str): The filepath to export the basis set to.
+
+    Keyword Args:
+        catalogue (str): The path to the ccRepo catalogue file.
 
     Returns:
         dict: Dictionary containing the basis set information.
     """
+    if 'catalogue' in kwargs:
+        catalogue = kwargs['catalogue']
     basis_set_block, available_basis = get_basis_set_block(
         catalogue, elements, basis_set_name
     )
@@ -99,7 +107,7 @@ def fetch_basis(
     if format:
         converted_basis = convert_to_format(parsed_basis_sets, format.lower())
         ccrepo_logger.info(
-            f"Fetched basis set for element(s) {', '.join(available_basis)} with basis set {basis_set_name} from the ccRepo catalogue and converted fo format {format}."
+            f"Fetched basis set for element(s) {', '.join(available_basis)} with basis set {basis_set_name} from the ccRepo catalogue and converted to format {format}."
         )
         if not export:
             return converted_basis
