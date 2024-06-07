@@ -4,8 +4,9 @@ from ccrepo.containers import BasisSet, Shell
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 data_filepath = os.path.join(script_dir, 'data', 'sample_basis.txt')
-with open(data_filepath)) as sample_basis:
+with open(data_filepath) as sample_basis:
     sample_data = sample_basis.read()
+    
 basis_set = fetch_basis(["H", "B"], "cc-pVDZ", catalogue=sample_data)
 
 def test_fetch_basis():
