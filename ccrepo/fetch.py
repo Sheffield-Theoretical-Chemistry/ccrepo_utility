@@ -7,9 +7,7 @@ from .converters import convert_to_format
 from .process import parse_basis_set
 
 
-def get_basis_set_block(
-    content: str, elements: Union[str, list], basis_set_name: str
-) -> str:
+def get_basis_set_block(content: str, elements: Union[str, list], basis_set_name: str) -> str:
     """
     Extract the basis set block for a given element and basis set name.
 
@@ -54,9 +52,7 @@ def get_basis_set_block(
     #             f"No {basis_set_name} found for element {element} in the ccRepo catalogue."
     #         )
 
-    unavailable_basis = [
-        element for element in elements if element not in available_basis
-    ]
+    unavailable_basis = [element for element in elements if element not in available_basis]
     if blocks:
         ccrepo_logger.info(
             f"Found {basis_set_name} for element(s) {','.join(available_basis)} in the ccRepo catalogue."
@@ -97,9 +93,7 @@ def fetch_basis(
     """
     if "catalogue" in kwargs:
         catalogue = kwargs["catalogue"]
-    basis_set_block, available_basis = get_basis_set_block(
-        catalogue, elements, basis_set_name
-    )
+    basis_set_block, available_basis = get_basis_set_block(catalogue, elements, basis_set_name)
     parsed_basis_sets = parse_basis_set(basis_set_block)
     if format:
         converted_basis = convert_to_format(parsed_basis_sets, format.lower())

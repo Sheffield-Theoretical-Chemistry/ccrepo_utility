@@ -14,7 +14,7 @@ authors = [
 keywords = ["quantum", "chemistry", "basis sets", "ccrepo", "basisopt"]
 
 [project.urls]
-Repository = "https://github.com/stedonnelly/ccrepo_utility
+Repository = "https://github.com/stedonnelly/ccrepo_utility"
 
 [options]
 requires-python = ">=3.10"
@@ -30,15 +30,13 @@ dev = [
     "pytest>=8.2.2",
     "black>=24.4.2",
     "sphinx>=7.3.7",
-    "sphinx-rtd-theme>=2.0.0"
+    "sphinx-rtd-theme>=2.0.0",
+    "isort>=5.13.2"
 ]
 
 [tool.black]
-skip-string-normalization = ture
+skip-string-normalization = true
 line-length = 100
-
-[project.urls]
-Homepage = "https://github.com/stedonnelly/ccrepo_utility"
 
 [tool.setuptools]
 packages = ["ccrepo"]
