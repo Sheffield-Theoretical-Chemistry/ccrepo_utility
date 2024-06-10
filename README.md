@@ -25,5 +25,3 @@ There are working examples in the examples folder, and these are (or will be) do
 If you use this information in your research, please consider citing the [ccRepo website](http://www.grant-hill.group.shef.ac.uk/ccrepo/index.html) as part of your paper.
 
 You should also cite the original literature detailing the basis sets you use. A [full bibliography](http://www.grant-hill.group.shef.ac.uk/ccrepo/bib.html) can be found on ccRepo to help with this.
-
-In addition it would be greatly appreciated if you would cite this GitHub repository if you used this utility in your work. :)
