@@ -3,12 +3,8 @@
 A utility to pull a basis set from ccRepo in MOLPRO format
 
 ## Installation
-
-The library can be installed using pip
-
-    pip install ccrepo
-    
-You can also install a local copy in a fresh environment from the top-level directory by running
+   
+You can install a local copy in a fresh environment from the top-level directory by running
 
     pip install -e .
 
