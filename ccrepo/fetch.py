@@ -69,8 +69,8 @@ def get_basis_set_block(content: str, elements: Union[str, list], basis_set_name
 
 
 def fetch_basis(
-    elements: list,
     basis_set_name: str,
+    elements: list,
     format: Optional[list] = None,
     export: Optional[bool] = None,
     filepath: str = None,
@@ -92,8 +92,10 @@ def fetch_basis(
         dict: Dictionary containing the basis set information.
     """
     if "catalogue" in kwargs:
-        catalogue = kwargs["catalogue"]
-    basis_set_block, available_basis = get_basis_set_block(catalogue, elements, basis_set_name)
+        cat = kwargs["catalogue"]
+    	basis_set_block, available_basis = get_basis_set_block(cat, elements, basis_set_name)
+    else:
+    	basis_set_block, available_basis = get_basis_set_block(catalogue, elements, basis_set_name)
     parsed_basis_sets = parse_basis_set(basis_set_block)
     if format:
         converted_basis = convert_to_format(parsed_basis_sets, format.lower())
