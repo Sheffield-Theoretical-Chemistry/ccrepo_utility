@@ -93,9 +93,9 @@ def fetch_basis(
     """
     if "catalogue" in kwargs:
         cat = kwargs["catalogue"]
-    	basis_set_block, available_basis = get_basis_set_block(cat, elements, basis_set_name)
+        basis_set_block, available_basis = get_basis_set_block(cat, elements, basis_set_name)
     else:
-    	basis_set_block, available_basis = get_basis_set_block(catalogue, elements, basis_set_name)
+        basis_set_block, available_basis = get_basis_set_block(catalogue, elements, basis_set_name)
     parsed_basis_sets = parse_basis_set(basis_set_block)
     if format:
         converted_basis = convert_to_format(parsed_basis_sets, format.lower())
