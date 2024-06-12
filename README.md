@@ -1,6 +1,15 @@
 # ccrepo_utility
 
-A utility to pull a basis set from ccRepo in MOLPRO format
+A utility to pull a basis set from ccRepo
+
+## Capabilities
+
+The ccRepo package can current pull a basis set from the [ccRepo](http://www.grant-hill.group.shef.ac.uk/ccrepo/index.html) and can convert it to different formats for using in quantum chemistry packages.
+Basis sets labelled with -PP should be used with ECPs from the [Stuttgart/Koeln library](https://www.tc.uni-koeln.de/PP/index.en.html).
+
+It can currently convert a ccRepo basis to the following formats:
+
+   - MOLPRO
 
 ## Installation
    
@@ -10,7 +19,7 @@ You can install a local copy in a fresh environment from the top-level directory
 
 ## Contributing
 
-Contributions are welcomed, either in the form of raising issues or pull requests on this repo. Please take a look at the Code of Conduct before interacting, which includes instructions for reporting any violations.
+Contributions are welcomed, either in the form of raising issues or pull requests on this repo.
 
 ## Examples
 
