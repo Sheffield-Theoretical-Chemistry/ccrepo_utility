@@ -1,4 +1,4 @@
-# ccrepo_utility
+# ccRepo Utility
 
 A utility to pull a basis set from ccRepo
 
