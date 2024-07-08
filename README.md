@@ -1,6 +1,6 @@
 # ccRepo Utility
 
-A utility to pull a basis set from ccRepo
+A utility to pull a basis set from ccRepo written by Shaun Donnelly (stedonnelly)
 
 ## Capabilities
 
