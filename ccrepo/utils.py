@@ -14,7 +14,7 @@ def convert_to_basisopt_internal(basis_sets):
     """
     basisopt_internal = {}
     for key in basis_sets.keys():
-        basisopt_internal[key] = basis_sets[key].shells
+        basisopt_internal[key.lower()] = basis_sets[key].shells
     return basisopt_internal
 
 
