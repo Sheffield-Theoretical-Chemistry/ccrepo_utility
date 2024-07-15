@@ -28,7 +28,7 @@ def parse_basis_set(input_data):
         # Process each line of the basis set data
         for line in lines[2:]:
             parts = line.split()
-            if parts[0] in "SPDFGHIJKL":  # Check if the line starts with an angular momentum label
+            if parts[0] in "spdfghijkl":  # Check if the line starts with an angular momentum label
                 if (
                     current_angular_momentum
                 ):  # If there's an ongoing block, save it before starting a new one

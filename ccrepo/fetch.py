@@ -19,6 +19,8 @@ def get_basis_set_block(content: str, elements: Union[str, list], basis_set_name
     Returns:
         str: The block of the basis set for the specified element and basis set name.
     """
+    elements = [element.lower() for element in elements]
+    content = content.lower()
     lines = content.split("\n")
     blocks = []
     capture = False
