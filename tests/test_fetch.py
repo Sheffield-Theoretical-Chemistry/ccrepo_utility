@@ -1,4 +1,3 @@
-# %%
 import os
 
 from ccrepo.containers import BasisSet, Shell
@@ -33,31 +32,29 @@ def test_shells():
 
 def test_exponents():
     # Assert that the exponents are correct
-    assert basis_set["b"].shells[0].exps.tolist() == [
-        1.301000e01,
-        1.962000e00,
+    assert basis_set["h"].shells[0].exps.tolist() == [
+        1.301000e+01,
+        1.962000e+00,
         4.446000e-01,
         1.220000e-01,
     ]
     assert basis_set["h"].shells[1].exps.tolist() == [7.270000e-01]
 
     assert basis_set["b"].shells[0].exps.tolist() == [
-        4.570000e03,
-        6.859000e02,
-        1.565000e02,
-        4.447000e01,
-        1.448000e01,
-        5.131000e00,
-        1.898000e00,
+        4.570000e+03,
+        6.859000e+02,
+        1.565000e+02,
+        4.447000e+01,
+        1.448000e+01,
+        5.131000e+00,
+        1.898000e+00,
         3.329000e-01,
         1.043000e-01,
     ]
     assert basis_set["b"].shells[1].exps.tolist() == [
-        6.001000e00,
-        1.241000e00,
+        6.001000e+00,
+        1.241000e+00,
         3.364000e-01,
         9.538000e-02,
     ]
 
-
-# %%
