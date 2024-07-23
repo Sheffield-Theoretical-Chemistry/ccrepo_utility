@@ -94,6 +94,7 @@ def fetch_basis(
     Returns:
         dict: Dictionary containing the basis set information.
     """
+    basis_set_name = basis_set_name.lower()
     if "catalogue" in kwargs:
         cat = kwargs["catalogue"]
         basis_set_block, available_basis = get_basis_set_block(cat, elements, basis_set_name)
