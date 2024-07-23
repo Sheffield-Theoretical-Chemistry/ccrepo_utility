@@ -11,6 +11,10 @@ It can currently convert a ccRepo basis to the following formats:
 
    - MOLPRO
 
+The following formats can be read into a ccRepo basis:
+
+   - MOLPRO
+
 ## Installation
    
 You can install a local copy in a fresh environment from the top-level directory by running
