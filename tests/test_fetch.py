@@ -14,33 +14,33 @@ basis_set = fetch_basis("cc-pVDZ", ["H", "B"],  catalogue=sample_data)
 
 def test_fetch_basis():
     # Assert that the basis set has the keys "B" and "H"
-    assert "B" in basis_set
-    assert "H" in basis_set
+    assert "b" in basis_set
+    assert "h" in basis_set
 
     # Assert that the objects in each key are ccrepo BasisSet objects
-    assert isinstance(basis_set["B"], BasisSet)
-    assert isinstance(basis_set["H"], BasisSet)
+    assert isinstance(basis_set["b"], BasisSet)
+    assert isinstance(basis_set["h"], BasisSet)
 
 
 def test_shells():
     # Assert that the objects in the dict entry.shells are Shell objects
-    for shell in basis_set["B"].shells:
+    for shell in basis_set["b"].shells:
         assert isinstance(shell, Shell)
-    for shell in basis_set["H"].shells:
+    for shell in basis_set["h"].shells:
         assert isinstance(shell, Shell)
 
 
 def test_exponents():
     # Assert that the exponents are correct
-    assert basis_set["H"].shells[0].exps.tolist() == [
+    assert basis_set["b"].shells[0].exps.tolist() == [
         1.301000e01,
         1.962000e00,
         4.446000e-01,
         1.220000e-01,
     ]
-    assert basis_set["H"].shells[1].exps.tolist() == [7.270000e-01]
+    assert basis_set["h"].shells[1].exps.tolist() == [7.270000e-01]
 
-    assert basis_set["B"].shells[0].exps.tolist() == [
+    assert basis_set["b"].shells[0].exps.tolist() == [
         4.570000e03,
         6.859000e02,
         1.565000e02,
@@ -51,7 +51,7 @@ def test_exponents():
         3.329000e-01,
         1.043000e-01,
     ]
-    assert basis_set["B"].shells[1].exps.tolist() == [
+    assert basis_set["b"].shells[1].exps.tolist() == [
         6.001000e00,
         1.241000e00,
         3.364000e-01,

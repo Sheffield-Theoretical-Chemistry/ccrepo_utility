@@ -1,4 +1,4 @@
-# ccrepo_basis_set/converters.py
+# ccrepo_basis_set/writers.py
 
 from . import ccrepo_logger
 

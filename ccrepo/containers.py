@@ -1,6 +1,7 @@
 # ccrepo_basis_set/containers.py
 
 import numpy as np
+from .writers import convert_to_format
 
 
 class Shell:
@@ -30,11 +31,37 @@ class BasisSet:
         shells (list): List of Shell objects.
     """
 
-    def __init__(self, element, basis_set_name, primitives_info):
+    def __init__(
+        self,
+        element: str = None,
+        basis_set_name: str = 'Untitled',
+        primitives_info: str = None
+    ):
         self.element = element
         self.basis_set_name = basis_set_name
         self.contraction = primitives_info
         self.shells = []
 
-    def add_shell(self, shell):
+    def add_shell(self, shell: Shell):
+        """Add a shell to the basis set.
+
+        Args:
+            shell (Shell): Shell object to add to the basis set.
+        """
         self.shells.append(shell)
+
+    def export_to_file(self, format: str, filename: str):
+        """
+        Export the basis set to a file.
+
+        Args:
+            format (str): The format to export the basis set to.
+            filename (str): The name of the file to export the basis set to.
+
+        Returns:
+            None
+        """
+        basis_set = convert_to_format(self, format)
+        with open(filename, "w") as export_basis:
+            export_basis.write(basis_set)
+        print(f"Exported basis set to {filename}.")

@@ -2,9 +2,10 @@
 
 from typing import Optional, Union
 
-from . import catalogue, ccrepo_logger
-from .converters import convert_to_format
+from . import ccrepo_logger
+from .writers import convert_to_format
 from .process import parse_basis_set
+from .data import catalogue
 
 
 def get_basis_set_block(content: str, elements: Union[str, list], basis_set_name: str) -> str:
