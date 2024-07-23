@@ -6,11 +6,13 @@
 from .containers import BasisSet, Shell
 import numpy as np
 
+
 def read_basis_file(filename:str, basis_format: str):
     if basis_format == 'molpro':
         with open(filename, 'r') as f:
             basis_set_string = f.readlines()
             return _read_molpro_format(basis_set_string)
+        
         
 def _read_molpro_format(basis_set_string: str):
     current_element = None
