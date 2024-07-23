@@ -6,11 +6,8 @@ from ccrepo.fetch import fetch_basis
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 data_filepath = os.path.join(script_dir, "data", "sample_basis.txt")
-with open(data_filepath) as sample_basis:
-    sample_data = sample_basis.read()
-sample_data = sample_data.lower()
 
-basis_set = fetch_basis("cc-pVDZ", ["H", "B"],  catalogue=sample_data)
+basis_set = fetch_basis("cc-pVDZ", ["H", "B"])
 
 
 def test_fetch_basis():
