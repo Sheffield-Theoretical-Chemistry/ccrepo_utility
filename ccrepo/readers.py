@@ -28,7 +28,7 @@ def _read_molpro_format(basis_set_string: str):
             angular_momentum, element, *values = line.replace(';','').strip().split(',')
             if angular_momentum in angular_momenta:
                 current_angular_momentum = angular_momentum.lower()
-                current_element = element.lower()
+                current_element = element.lower().strip()
                 basis_set_dict.setdefault(current_element, {}).setdefault(current_angular_momentum, {})
                 basis_set_dict[current_element][current_angular_momentum]['exponents'] = np.array(values, dtype=float)
                 basis_set_dict[current_element][current_angular_momentum]['coefficients'] = []
