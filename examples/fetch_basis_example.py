@@ -1,8 +1,8 @@
 #%%
 import ccrepo
-from ccrepo.utils import write_basis, convert_to_format
+from ccrepo.writers import write_basis, convert_to_format
 
-basis_sets = ccrepo.fetch_basis(['H', 'He'], 'cc-pVDZ')
+basis_sets = ccrepo.fetch_basis('cc-pVDZ', ['H', 'He'])
 
 write_basis(basis_sets, filename = './H_He_cc_pVDZ.txt', format = 'molpro') # Writes basis to file
 
