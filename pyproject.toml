@@ -4,12 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ccrepo"
-version = "1.0.0b2"
+version = "1.0.3b1"
 description = "A utility for calling and using a basis set from ccrepo"
 readme = "README.md"
 license = { text = "MIT License (Non-Commercial)" }
 authors = [
-    { name = "Dr. Shaun Thomas Edward Donnelly", email = "shaun.t.e.donnelly@gmail.com" }
+    { name = "Dr. Shaun Thomas Edward Donnelly", email = "shaun.t.e.donnelly@gmail.com" },
+    { name = "Dr. J Grant Hill", email = "grant.hill@sheffield.ac.uk" }
 ]
 keywords = ["quantum", "chemistry", "basis sets", "ccrepo", "basisopt"]
 
