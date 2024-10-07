@@ -33,7 +33,12 @@ def _read_molpro_format(basis_set_string: str):
                 basis_set_dict[current_element][current_angular_momentum]['exponents'] = np.array(values, dtype=float)
                 basis_set_dict[current_element][current_angular_momentum]['coefficients'] = []
             elif angular_momentum == 'c':
-                basis_set_dict[current_element][current_angular_momentum]['coefficients'].append(np.array(values, dtype=float))
+                coeff_idx_start, coeff_idx_finish = line.split(',')[1].split('.')
+                coeff_idx_start = int(coeff_idx_start)-1
+                coeff_idx_finish = int(coeff_idx_finish)
+                coefficients_array = np.zeros(basis_set_dict[current_element][current_angular_momentum]['exponents'].shape)
+                coefficients_array[coeff_idx_start:coeff_idx_finish] = np.array(values, dtype=float)
+                basis_set_dict[current_element][current_angular_momentum]['coefficients'].append(coefficients_array)
     
     for element in basis_set_dict:
         basis_set = BasisSet(element=element)
