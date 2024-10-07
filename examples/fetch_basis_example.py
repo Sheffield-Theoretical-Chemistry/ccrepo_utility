@@ -1,16 +1,10 @@
-# %%
+#%%
+import ccrepo
+from ccrepo.writers import write_basis, convert_to_format
 
-from ccrepo.converters import convert_to_format
-from ccrepo.fetch import fetch_basis
-from ccrepo.utils import export_basis_to_file
+basis_sets = ccrepo.fetch_basis('cc-pVDZ', ['H', 'He'])
 
-basis = fetch_basis("H", "cc-pVDZ")
+write_basis(basis_sets, filename = './H_He_cc_pVDZ.txt', format = 'molpro') # Writes basis to file
 
-# molpro_format = convert_to_format(basis, "molpro")
-
-# export_basis_to_file(molpro_format, "H_He_cc_pVDZ.txt")
-
-# %%
-
-basis2 = fetch_basis("He", "cc-pVDZ")
+molpro_str = convert_to_format(basis_sets, 'molpro') # Returns molpro string
 # %%

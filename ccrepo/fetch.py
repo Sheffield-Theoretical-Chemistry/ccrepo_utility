@@ -72,8 +72,8 @@ def get_basis_set_block(content: str, elements: Union[str, list], basis_set_name
 
 
 def fetch_basis(
-    basis_set_name: str,
     elements: list,
+    basis_set_name: str,
     format: Optional[list] = None,
     export: Optional[bool] = None,
     filepath: str = None,

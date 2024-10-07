@@ -31,7 +31,7 @@ This will return an dictionary containing a series of BasisSet objects. Each bas
 
 .. code-block:: python
 	
-	basis_sets = ccrepo.fetch_basis(['H','N','O'], cc-pVQZ')
+	basis_sets = ccrepo.fetch_basis(['H','N','O'], 'cc-pVQZ')
 	hydrogen_basis = basis_sets['H']
 	hydrogen_shells = basis_sets['H'].shells
 	
