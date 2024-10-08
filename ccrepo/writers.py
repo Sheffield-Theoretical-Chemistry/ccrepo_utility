@@ -4,6 +4,7 @@ from . import ccrepo_logger
 
 SUPPORTED_FORMATS = {}
 
+
 def convert_to_format(basis_set, format: str) -> str:
     """
     Convert a BasisSet object to a string in the specified format.
@@ -31,9 +32,11 @@ def register_format(format: str):
     Returns:
         callable: Decorator function.
     """
+
     def decorator(func):
         SUPPORTED_FORMATS[format] = func
         return func
+
     return decorator
 
 
@@ -73,16 +76,20 @@ def _convert_to_molpro(basis_sets: list) -> str:
     def _create_element_string(basis_set):
         if basis_set.contraction:
             return (
-            f"! {basis_set.element.capitalize()} {basis_set.contraction}"
-            + "\n"
-            + "\n".join([_convert_shell(shell, basis_set.element) for shell in basis_set.shells])
-            + "\n\n"
-        )
+                f"! {basis_set.element.capitalize()} {basis_set.contraction}"
+                + "\n"
+                + "\n".join(
+                    [_convert_shell(shell, basis_set.element) for shell in basis_set.shells]
+                )
+                + "\n\n"
+            )
         else:
             return (
                 f"! {basis_set.element.capitalize()}"
                 + "\n"
-                + "\n".join([_convert_shell(shell, basis_set.element) for shell in basis_set.shells])
+                + "\n".join(
+                    [_convert_shell(shell, basis_set.element) for shell in basis_set.shells]
+                )
                 + "\n\n"
             )
 
@@ -97,7 +104,7 @@ basis={{
 
     ccrepo_logger.info("Converted basis set to Molpro format.")
     return molpro_str
-    
+
 
 def write_basis(basis_sets, filename: str, format: str):
     """

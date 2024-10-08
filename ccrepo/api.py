@@ -3,11 +3,11 @@
 # Description: This file contains the main API functions for the ccrepo package.
 
 import logging
-import colorlog
+import os
 
+import colorlog
 import requests
 from tqdm import tqdm
-import os
 
 
 def _set_logger(filename: str = None):
