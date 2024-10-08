@@ -14,7 +14,7 @@ def read_basis_file(filename: str, format: str) -> BasisSet:
     if format in SUPPORTED_FORMATS.keys():
         with open(filename, 'r') as f:
             basis_set_string = f.readlines()
-            return SUPPORTED_FORMATS[format](basis_set_str)
+            return SUPPORTED_FORMATS[format](basis_set_string)
 
 
 def register_format(format: str):
