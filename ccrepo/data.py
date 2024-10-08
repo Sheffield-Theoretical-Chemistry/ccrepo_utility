@@ -2,8 +2,9 @@
 
 # Description: This file contains the data structures used in the ccrepo package.
 
-from .api import fetch_file_from_repo
 from typing import Optional, Union
+
+from .api import fetch_file_from_repo
 
 ELEMENTS = [
     "H",
@@ -122,6 +123,7 @@ ELEMENTS = [
 
 catalogue = fetch_file_from_repo()
 
+
 def basis_availability(catalogue: str, elements: list = None):
     basis_set_availablity = {}
     contractions = {}
@@ -149,7 +151,8 @@ def basis_availability(catalogue: str, elements: list = None):
 
 BASIS_SETS, CONTRACTION_SCHEMES = basis_availability(catalogue)
 
-def availability(elements: Optional[Union[list,str]] = None) -> dict:
+
+def availability(elements: Optional[Union[list, str]] = None) -> dict:
     """
     Returns a list of all available basis sets in the ccRepo database.
 
