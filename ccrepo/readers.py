@@ -6,15 +6,33 @@
 from .containers import BasisSet, Shell
 import numpy as np
 
+SUPPORTED_FORMATS = {}
 
-def read_basis_file(filename:str, basis_format: str):
-    if basis_format == 'molpro':
+def read_basis_file(filename: str, format: str) -> BasisSet:
+    if format in SUPPORTED_FORMATS.keys():
         with open(filename, 'r') as f:
             basis_set_string = f.readlines()
-            return _read_molpro_format(basis_set_string)
-        
-        
-def _read_molpro_format(basis_set_string: str):
+            return SUPPORTED_FORMATS[format](basis_set_str)
+
+
+def register_format(format: str):
+    """
+    Decorator to register a format and add it to the supported_formats dictionary.
+
+    Args:
+        format (str): Format to be registered.
+
+    Returns:
+        callable: Decorator function.
+    """
+    def decorator(func):
+        SUPPORTED_FORMATS[format] = func
+        return func
+    return decorator
+
+
+@register_format("molpro")
+def _read_molpro_format(basis_set_string: str) -> BasisSet:
     current_element = None
     current_angular_momentum = None
     angular_momenta = 'spdfghijkl'
