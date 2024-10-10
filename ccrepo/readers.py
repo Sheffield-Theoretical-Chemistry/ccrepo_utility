@@ -77,7 +77,7 @@ def _read_molpro_format(basis_set_string: str) -> BasisSet:
             shell.l = angular_momentum
             shell.exps = basis_set_dict[element][angular_momentum]['exponents']
             shell.coefs = basis_set_dict[element][angular_momentum]['coefficients']
-            basis_set.shells.append(shell)
+            basis_set.add_shell(shell)
         shell_exponents = [''.join([str(len(shell.exps)), shell.l]) for shell in basis_set.shells]
         shell_coefs = [''.join([str(len(shell.coefs)), shell.l]) for shell in basis_set.shells]
         basis_set.primitives_info = f'({"".join(shell_exponents)})->[{"".join(shell_coefs)}]'

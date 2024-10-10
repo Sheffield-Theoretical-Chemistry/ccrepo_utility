@@ -20,6 +20,21 @@ class Shell:
         self.exps = np.array([])
         self.coefs = []
         self.leg_params = ()
+        self.segments = []
+
+
+class Segment:
+    """Lightweight container for basis set Segments.
+
+    Attributes:
+        exps (numpy array, float): array of exponents
+        coefs (numpy array, float): array of coefficients
+    """
+
+    def __init__(self):
+        self.exps = np.array([])
+        self.coefs = np.array([])
+        self.l = str
 
 
 class BasisSet:
@@ -47,8 +62,23 @@ class BasisSet:
             shell (Shell): Shell object to add to the basis set.
         """
         self.shells.append(shell)
+        self.segment_shell(shell)
 
-    def export_to_file(self, format: str, filename: str):
+    def segment_shell(self,shell):
+        """ Segment the shells into segments of exponents and coefficients. """
+        exps = shell.exps
+        coefs = shell.coefs
+
+        segments = [np.array([exps, coef]) for coef in coefs]
+        segments = [segment[:, segment[1] != 0] for segment in segments]
+        for segment in segments:
+            segment_container = Segment()
+            segment_container.exps = segment[0]
+            segment_container.coefs = segment[1]
+            segment_container.l = shell.l
+            shell.segments.append(segment_container)
+
+    def export_to_file(self, filename: str, format: str):
         """
         Export the basis set to a file.
 
