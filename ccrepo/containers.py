@@ -3,6 +3,7 @@
 import numpy as np
 
 from .writers import convert_to_format
+from .data import get_element_name
 
 
 class Shell:
@@ -50,6 +51,7 @@ class BasisSet:
     def __init__(
         self, element: str = None, basis_set_name: str = 'Untitled', primitives_info: str = None
     ):
+        self.name = get_element_name(element)
         self.element = element
         self.basis_set_name = basis_set_name
         self.contraction = primitives_info
