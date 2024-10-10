@@ -10,6 +10,9 @@ Basis sets labelled with -PP should be used with ECPs from the [Stuttgart/Koeln 
 It can currently convert a ccRepo basis to the following formats:
 
    - MOLPRO
+   - Psi4
+   - ORCA
+   - Gaussian
 
 The following formats can be read into a ccRepo basis:
 
@@ -29,9 +32,9 @@ Contributions are welcomed, either in the form of raising issues or pull request
 
 There are working examples in the examples folder, and these are (or will be) documented in the documentation. Documentation can be built by navigating to the docs folder locally 
 
-    sphinx-build -b html . build 
+    sphinx-build -b html . docs
 
-You can then find the documentation by going to the build folder and opening the index.html file in your browser.
+You can then find the documentation by going to the docs folder and opening the index.html file in your browser.
 
 ## Acknowledging usage
 
