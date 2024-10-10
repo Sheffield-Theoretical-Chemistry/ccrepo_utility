@@ -10,7 +10,7 @@ import requests
 from tqdm import tqdm
 
 
-def _set_logger(filename: str = None):
+def _set_logger(filename: str = None, level=logging.INFO):
     """
     Initialises Python logging module with a custom format and log level.
     """
@@ -48,7 +48,7 @@ def fetch_file_from_repo():
     """
 
     script_dir = os.path.dirname(os.path.realpath(__file__))
-    data_filepath = os.path.join(script_dir, "data", "cc-basis-catalogue.txt")
+    data_filepath = os.path.join(script_dir, "basis_data", "cc-basis-catalogue.txt")
 
     repo_url = "https://raw.githubusercontent.com/Sheffield-Theoretical-Chemistry/ccrepo-raw/main/cc-basis-catalogue.txt"
     # headers = {"Authorization": f"token {token}"}
