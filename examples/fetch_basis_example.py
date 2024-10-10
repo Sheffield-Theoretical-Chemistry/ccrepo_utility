@@ -1,5 +1,5 @@
 import ccrepo
-from ccrepo.writers import write_basis, convert_to_format
+from ccrepo import write_basis, convert_to_format
 
 basis_sets = ccrepo.fetch_basis(['H', 'He'], 'cc-pVDZ')
 
