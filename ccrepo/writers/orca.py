@@ -1,5 +1,5 @@
-from . import register_format
 from ..data import get_element_name
+from . import register_format
 
 
 @register_format("orca")
@@ -37,9 +37,11 @@ def _convert_to_orca(basis_sets: dict) -> str:
         )
 
     def write_basis(basis_set):
-        return "$DATA \n\n"+(
-            '\n\n'.join([write_element(basis_sets[element]) for element in basis_sets])
-        )+"\n\n$END"
+        return (
+            "$DATA \n\n"
+            + ('\n\n'.join([write_element(basis_sets[element]) for element in basis_sets]))
+            + "\n\n$END"
+        )
 
     psi4_str = write_basis(basis_sets)
     return psi4_str

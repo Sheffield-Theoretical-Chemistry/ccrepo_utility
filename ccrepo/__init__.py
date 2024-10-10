@@ -5,7 +5,7 @@ from .data import get_basis, get_elements
 from .fetch import fetch_basis
 from .readers import read_basis_file
 from .utils import convert_to_basisopt_internal, convert_to_ccrepo
-from .writers import write_basis, convert_to_format
+from .writers import convert_to_format, write_basis
 
 __author__ = "Dr. Shaun T E Donnelly, Dr. J Grant Hill"
 __author_email__ = "shaun.t.e.donnelly@gmail.com, grant.hill@sheffield.ac.uk"

@@ -1,5 +1,6 @@
 from . import register_format
 
+
 @register_format("molpro")
 def _convert_to_molpro(basis_sets: dict) -> str:
     """

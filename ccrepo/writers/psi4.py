@@ -1,5 +1,6 @@
 from . import register_format
 
+
 @register_format("psi4")
 def _convert_to_psi4(basis_sets: dict) -> str:
     """

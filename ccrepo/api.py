@@ -10,7 +10,7 @@ import requests
 from tqdm import tqdm
 
 
-def _set_logger(filename: str = None, level = logging.INFO):
+def _set_logger(filename: str = None, level=logging.INFO):
     """
     Initialises Python logging module with a custom format and log level.
     """

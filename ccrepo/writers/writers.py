@@ -4,8 +4,10 @@ from .. import ccrepo_logger
 
 SUPPORTED_FORMATS = {}
 
+
 def supported_writers():
     return list(SUPPORTED_FORMATS.keys())
+
 
 def register_format(format: str):
     """
@@ -23,7 +25,7 @@ def register_format(format: str):
         return func
 
     return decorator
-    
+
 
 def convert_to_format(basis_set, format: str) -> str:
     """

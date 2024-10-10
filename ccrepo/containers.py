@@ -2,8 +2,8 @@
 
 import numpy as np
 
-from .writers import convert_to_format
 from .data import get_element_name
+from .writers import convert_to_format
 
 
 class Shell:
@@ -66,8 +66,8 @@ class BasisSet:
         self.shells.append(shell)
         self.segment_shell(shell)
 
-    def segment_shell(self,shell):
-        """ Segment the shells into segments of exponents and coefficients. """
+    def segment_shell(self, shell):
+        """Segment the shells into segments of exponents and coefficients."""
         exps = shell.exps
         coefs = shell.coefs
 

@@ -1,5 +1,6 @@
 from . import register_format
 
+
 @register_format("gaussian")
 def _convert_to_gaussian(basis_sets: dict) -> str:
     """
