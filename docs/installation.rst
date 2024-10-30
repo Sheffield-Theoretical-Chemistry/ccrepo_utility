@@ -15,7 +15,7 @@ Installing from source
 
 ccRepo can also be installed from the github source directly::
 
-		pip install git+ LINK TO FOLLOW
+		pip install git+ https://github.com/Sheffield-Theoretical-Chemistry/ccrepo_utility.git
 		
 Alternatively, ccRepo can be installed from a local directory which you may have locally developed. It is recommended that you do this in a clean python environment.
 You can install it by navigating to the top-level directory using the command::

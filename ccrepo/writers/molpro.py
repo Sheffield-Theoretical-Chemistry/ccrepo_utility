@@ -1,4 +1,5 @@
 from . import register_format
+from ..api import ccrepo_logger
 
 
 @register_format("molpro")
