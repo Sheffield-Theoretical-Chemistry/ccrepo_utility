@@ -52,7 +52,6 @@ def _convert_to_molpro(basis_sets: dict) -> str:
                 + "\n".join(
                     [_convert_shell(shell, basis_set.element) for shell in basis_set.shells]
                 )
-                + "\n\n"
             )
 
     molpro_str = f"""
@@ -60,7 +59,6 @@ def _convert_to_molpro(basis_sets: dict) -> str:
 
 spherical
 basis={{
-
 {''.join(_create_element_string(basis_sets[key]) for key in basis_sets)}
 }}"""
 
