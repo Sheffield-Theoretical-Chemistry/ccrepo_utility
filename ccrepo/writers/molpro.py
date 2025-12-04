@@ -38,7 +38,7 @@ def _convert_to_molpro(basis_sets: dict) -> str:
     def _create_element_string(basis_set):
         if basis_set.contraction:
             return (
-                f"! {basis_set.element.capitalize()} {basis_set.contraction}"
+                f"\n\n! {basis_set.element.capitalize()} {basis_set.contraction}"
                 + "\n"
                 + "\n".join(
                     [_convert_shell(shell, basis_set.element) for shell in basis_set.shells]
@@ -47,7 +47,7 @@ def _convert_to_molpro(basis_sets: dict) -> str:
             )
         else:
             return (
-                f"! {basis_set.element.capitalize()}"
+                f"\n\n! {basis_set.element.capitalize()}"
                 + "\n"
                 + "\n".join(
                     [_convert_shell(shell, basis_set.element) for shell in basis_set.shells]

@@ -16,12 +16,17 @@ class Shell:
              corresponding to coefficients for each exponent
     """
 
-    def __init__(self):
-        self.l = "s"
-        self.exps = np.array([])
-        self.coefs = []
+    def __init__(
+        self, l: str = None, exponents: np.ndarray = None, coefficients: np.ndarray = None
+    ):
+        self.l = l if l else "s"
+        self.exps = exponents if exponents is not None else np.array([])
+        self.coefs = coefficients if coefficients is not None else []
         self.leg_params = ()
         self.segments = []
+
+    def __repr__(self):
+        return f"Shell(l='{self.l}', n_exps={len(self.exps)}, n_contractions={len(self.coefs)})"
 
 
 class Segment:
