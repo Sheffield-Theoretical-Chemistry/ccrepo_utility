@@ -16,7 +16,7 @@ SUPPORTED_FORMATS = {}
 def read_basis_file(filename: str, format: str) -> BasisSet:
     if format in SUPPORTED_FORMATS.keys():
         with open(filename, 'r') as f:
-            basis_set_string = f.readlines()
+            basis_set_string = f.read()
             return SUPPORTED_FORMATS[format](basis_set_string)
 
 
@@ -44,6 +44,8 @@ def _read_molpro_format(basis_set_string: str) -> BasisSet:
     current_angular_momentum = None
     angular_momenta = 'spdfghijkl'
     basis_set_dict = {}
+
+    basis_set_string = basis_set_string.strip().splitlines()
 
     for line in basis_set_string:
         if line in ['spherical', 'basis={', '}', '']:
